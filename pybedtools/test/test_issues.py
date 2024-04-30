@@ -67,14 +67,20 @@ def test_issue_81():
 
 
 def test_issue_118():
+    import logging
+    log = logging.getLogger()
     p = psutil.Process(os.getpid())
     start_fds = p.num_fds()
+    start_fs = p.open_files()
+    log.debug(start_fs)
     a = pybedtools.example_bedtool("a.bed")
     b = pybedtools.example_bedtool("b.bed")
     for i in range(100):
         c = a.intersect(b)
         c.field_count()
     stop_fds = p.num_fds()
+    end_fs = p.open_files()
+    log.debug(end_fs)
     assert start_fds == stop_fds
 
 
