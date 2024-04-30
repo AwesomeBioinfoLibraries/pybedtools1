@@ -81,6 +81,7 @@ def test_issue_118():
     stop_fds = p.num_fds()
     end_fs = p.open_files()
     log.debug(end_fs)
+    assert set(end_fs).difference(start_fs) == set()
     assert start_fds == stop_fds
 
 
