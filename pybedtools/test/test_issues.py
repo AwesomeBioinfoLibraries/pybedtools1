@@ -7,6 +7,7 @@ from textwrap import dedent
 from pathlib import Path
 import pytest
 import psutil
+from psutil._common import get_procfs_path
 
 
 testdir = os.path.dirname(__file__)
@@ -66,12 +67,17 @@ def test_issue_81():
     ), result
 
 
+def get_fds(pid):
+    return os.listdir("%s/%s/fd" % (get_procfs_path(), pid))
+
+
 def test_issue_118():
     import logging
     log = logging.getLogger()
     p = psutil.Process(os.getpid())
     start_fds = p.num_fds()
     start_fs = p.open_files()
+    start_fds = get_fds(os.getpid())
     log.debug(start_fs)
     a = pybedtools.example_bedtool("a.bed")
     b = pybedtools.example_bedtool("b.bed")
@@ -80,8 +86,10 @@ def test_issue_118():
         c.field_count()
     stop_fds = p.num_fds()
     end_fs = p.open_files()
+    end_fds = get_fds(os.getpid())
     log.debug(end_fs)
     assert set(end_fs).difference(start_fs) == set()
+    assert set(end_fds).difference(start_fds) == set()
     assert start_fds == stop_fds
 
 
