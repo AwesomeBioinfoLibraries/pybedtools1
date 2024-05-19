@@ -77,7 +77,7 @@ def test_issue_118():
     p = psutil.Process(os.getpid())
     start_fds = p.num_fds()
     start_fs = p.open_files()
-    start_fds = get_fds(os.getpid())
+    start_fds_lst = get_fds(os.getpid())
     log.debug(start_fs)
     a = pybedtools.example_bedtool("a.bed")
     b = pybedtools.example_bedtool("b.bed")
@@ -86,10 +86,12 @@ def test_issue_118():
         c.field_count()
     stop_fds = p.num_fds()
     end_fs = p.open_files()
-    end_fds = get_fds(os.getpid())
+    end_fds_lst = get_fds(os.getpid())
     log.debug(end_fs)
     assert set(end_fs).difference(start_fs) == set()
-    assert set(end_fds).difference(start_fds) == set()
+    assert set(start_fs).difference(end_fs) == set()
+    assert set(end_fds_lst).difference(start_fds_lst) == set()
+    assert set(start_fds_lst).difference(end_fds_lst) == set()
     assert start_fds == stop_fds
 
 
