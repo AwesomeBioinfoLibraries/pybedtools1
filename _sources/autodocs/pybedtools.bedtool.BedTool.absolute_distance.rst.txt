@@ -1,0 +1,6 @@
+﻿pybedtools.bedtool.BedTool.absolute\_distance
+=============================================
+
+.. currentmodule:: pybedtools.bedtool
+
+.. automethod:: BedTool.absolute_distance

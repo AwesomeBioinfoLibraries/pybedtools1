@@ -1,6 +1,0 @@
-numpydoc
-pathlib
-psutil
-pytest
-pyyaml
-sphinx

@@ -1,0 +1,6 @@
+﻿pybedtools.bedtool.BedTool.remove\_invalid
+==========================================
+
+.. currentmodule:: pybedtools.bedtool
+
+.. automethod:: BedTool.remove_invalid

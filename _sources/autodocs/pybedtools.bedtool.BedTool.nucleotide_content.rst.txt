@@ -1,0 +1,6 @@
+﻿pybedtools.bedtool.BedTool.nucleotide\_content
+==============================================
+
+.. currentmodule:: pybedtools.bedtool
+
+.. automethod:: BedTool.nucleotide_content

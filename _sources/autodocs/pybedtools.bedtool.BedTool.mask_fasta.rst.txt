@@ -1,0 +1,6 @@
+﻿pybedtools.bedtool.BedTool.mask\_fasta
+======================================
+
+.. currentmodule:: pybedtools.bedtool
+
+.. automethod:: BedTool.mask_fasta

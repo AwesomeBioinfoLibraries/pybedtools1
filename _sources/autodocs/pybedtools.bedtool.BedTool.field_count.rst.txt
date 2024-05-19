@@ -1,0 +1,6 @@
+﻿pybedtools.bedtool.BedTool.field\_count
+=======================================
+
+.. currentmodule:: pybedtools.bedtool
+
+.. automethod:: BedTool.field_count

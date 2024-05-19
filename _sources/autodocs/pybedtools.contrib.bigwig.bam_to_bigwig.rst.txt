@@ -1,0 +1,6 @@
+﻿pybedtools.contrib.bigwig.bam\_to\_bigwig
+=========================================
+
+.. currentmodule:: pybedtools.contrib.bigwig
+
+.. autofunction:: bam_to_bigwig

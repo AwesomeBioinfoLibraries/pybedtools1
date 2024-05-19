@@ -1,0 +1,6 @@
+﻿pybedtools.bedtool.BedTool.randomintersection\_bp
+=================================================
+
+.. currentmodule:: pybedtools.bedtool
+
+.. automethod:: BedTool.randomintersection_bp

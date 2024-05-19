@@ -1,0 +1,6 @@
+﻿pybedtools.bedtool.BedTool.colormap\_normalize
+==============================================
+
+.. currentmodule:: pybedtools.bedtool
+
+.. automethod:: BedTool.colormap_normalize

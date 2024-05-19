@@ -1,0 +1,6 @@
+﻿pybedtools.bedtool.BedTool.to\_bam
+==================================
+
+.. currentmodule:: pybedtools.bedtool
+
+.. automethod:: BedTool.to_bam

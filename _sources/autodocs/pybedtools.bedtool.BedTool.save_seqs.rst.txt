@@ -1,0 +1,6 @@
+﻿pybedtools.bedtool.BedTool.save\_seqs
+=====================================
+
+.. currentmodule:: pybedtools.bedtool
+
+.. automethod:: BedTool.save_seqs

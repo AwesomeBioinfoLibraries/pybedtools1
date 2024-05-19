@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Default arguments &#8212; pybedtools 0.10.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=d1102ebc" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=12dfc556" />
+    <script src="_static/documentation_options.js?v=82662543"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Chaining methods together (pipe)" href="piping.html" />
+    <link rel="prev" title="Saving the results" href="save-results.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="default-arguments">
+<h1>Default arguments<a class="headerlink" href="#default-arguments" title="Link to this heading">¶</a></h1>
+<p>Recall in the earlier <a class="reference internal" href="intersections.html#intersections"><span class="std std-ref">Intersections</span></a> section that we passed the <code class="file docutils literal notranslate"><span class="pre">u=True</span></code> argument to <code class="xref py py-meth docutils literal notranslate"><span class="pre">a.intersect()</span></code>:</p>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">pybedtools</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">pybedtools</span><span class="o">.</span><span class="n">example_bedtool</span><span class="p">(</span><span class="s1">&#39;a.bed&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span> <span class="o">=</span> <span class="n">pybedtools</span><span class="o">.</span><span class="n">example_bedtool</span><span class="p">(</span><span class="s1">&#39;b.bed&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a_with_b</span> <span class="o">=</span> <span class="n">a</span><span class="o">.</span><span class="n">intersect</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">u</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Let’s do the same thing but use different variable names for the <code class="xref py py-class docutils literal notranslate"><span class="pre">BedTool</span></code> objects so that
+the next section is less confusing:</p>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">pybedtools</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">exons</span> <span class="o">=</span> <span class="n">pybedtools</span><span class="o">.</span><span class="n">example_bedtool</span><span class="p">(</span><span class="s1">&#39;a.bed&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">snps</span> <span class="o">=</span> <span class="n">pybedtools</span><span class="o">.</span><span class="n">example_bedtool</span><span class="p">(</span><span class="s1">&#39;b.bed&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">exons_with_snps</span> <span class="o">=</span> <span class="n">exons</span><span class="o">.</span><span class="n">intersect</span><span class="p">(</span><span class="n">snps</span><span class="p">,</span> <span class="n">u</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>While we’re on the subject of arguments, note that we didn’t have to specify
+<code class="file docutils literal notranslate"><span class="pre">-a</span></code> or <code class="file docutils literal notranslate"><span class="pre">-b</span></code> arguments, like you would need if calling <code class="file docutils literal notranslate"><span class="pre">intersectBed</span></code> from the
+command line.  In other words, since <code class="file docutils literal notranslate"><span class="pre">exons</span></code> refers to the file <code class="file docutils literal notranslate"><span class="pre">a.bed</span></code> and
+<code class="file docutils literal notranslate"><span class="pre">snps</span></code> refers to the file <code class="file docutils literal notranslate"><span class="pre">b.bed</span></code>, the following line:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">exons_with_snps</span> <span class="o">=</span> <span class="n">exons</span><span class="o">.</span><span class="n">intersect</span><span class="p">(</span><span class="n">snps</span><span class="p">,</span> <span class="n">u</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>is equivalent to the command line usage of:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="err">$</span> <span class="n">intersectBed</span> <span class="o">-</span><span class="n">a</span> <span class="n">a</span><span class="o">.</span><span class="n">bed</span> <span class="o">-</span><span class="n">b</span> <span class="n">b</span><span class="o">.</span><span class="n">bed</span> <span class="o">-</span><span class="n">u</span> <span class="o">&gt;</span> <span class="n">tmpfile</span>
+</pre></div>
+</div>
+<p>But we didn’t have to explicitly pass the argument for <code class="file docutils literal notranslate"><span class="pre">-a</span></code> because
+<code class="xref py py-class docutils literal notranslate"><span class="pre">BedTool</span></code> objects make some assumptions for convenience.</p>
+<p>We’re calling a method on the <code class="xref py py-class docutils literal notranslate"><span class="pre">BedTool</span></code> object <code class="file docutils literal notranslate"><span class="pre">exons</span></code>, so
+<code class="xref py py-mod docutils literal notranslate"><span class="pre">pybedtools</span></code> assumes that the file <code class="file docutils literal notranslate"><span class="pre">exons</span></code> points to (stored in the
+attribute <code class="file docutils literal notranslate"><span class="pre">exons.fn</span></code>) is the one we want to use as input.  So by default, we
+don’t need to explicitly give the keyword argument <code class="file docutils literal notranslate"><span class="pre">a=exons.fn</span></code> because the
+<code class="xref py py-meth docutils literal notranslate"><span class="pre">exons.intersect()</span></code> method does so automatically.</p>
+<p>We’re also calling a method that takes a second bed file as input  – other
+such methods include <code class="xref py py-meth docutils literal notranslate"><span class="pre">BedTool.subtract()</span></code> and <code class="xref py py-meth docutils literal notranslate"><span class="pre">BedTool.closest()</span></code>,
+and others.  For these methods, in addition to assuming <code class="file docutils literal notranslate"><span class="pre">-a</span></code> is taken care
+of by the <code class="xref py py-attr docutils literal notranslate"><span class="pre">BedTool.fn</span></code> attribute, <code class="xref py py-mod docutils literal notranslate"><span class="pre">pybedtools</span></code> also assumes the
+first unnamed argument to these methods are the second file you want to
+operate on (and if you pass a <code class="xref py py-class docutils literal notranslate"><span class="pre">BedTool</span></code>, it’ll automatically use the
+file in the <code class="file docutils literal notranslate"><span class="pre">fn</span></code> attribute of that <code class="xref py py-class docutils literal notranslate"><span class="pre">BedTool</span></code>).</p>
+<p>An example may help to illustrate: these different ways of calling
+<code class="xref py py-meth docutils literal notranslate"><span class="pre">BedTool.intersect()</span></code> all have the same results, with the first version
+being the most compact (and probably most convenient):</p>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># these all have identical results</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x1</span> <span class="o">=</span> <span class="n">exons</span><span class="o">.</span><span class="n">intersect</span><span class="p">(</span><span class="n">snps</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x2</span> <span class="o">=</span> <span class="n">exons</span><span class="o">.</span><span class="n">intersect</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="n">exons</span><span class="o">.</span><span class="n">fn</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="n">snps</span><span class="o">.</span><span class="n">fn</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x3</span> <span class="o">=</span> <span class="n">exons</span><span class="o">.</span><span class="n">intersect</span><span class="p">(</span><span class="n">b</span><span class="o">=</span><span class="n">snps</span><span class="o">.</span><span class="n">fn</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x4</span> <span class="o">=</span> <span class="n">exons</span><span class="o">.</span><span class="n">intersect</span><span class="p">(</span><span class="n">snps</span><span class="p">,</span> <span class="n">a</span><span class="o">=</span><span class="n">exons</span><span class="o">.</span><span class="n">fn</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x1</span> <span class="o">==</span> <span class="n">x2</span> <span class="o">==</span> <span class="n">x3</span> <span class="o">==</span> <span class="n">x4</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+<p>Note that <code class="file docutils literal notranslate"><span class="pre">a.intersect(a=a.fn,</span> <span class="pre">b)</span></code> is not a valid Python expression, since
+non-keyword arguments must come before keyword arguments, but
+<code class="file docutils literal notranslate"><span class="pre">a.intersect(b,</span> <span class="pre">a=a.fn)</span></code> works fine.</p>
+<p>If you’re ever unsure, the docstring for these methods indicates which, if
+any, arguments are used as default.  For example, in the
+<code class="xref py py-meth docutils literal notranslate"><span class="pre">BedTool.intersect()</span></code> help, it says:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">For</span> <span class="n">convenience</span><span class="p">,</span> <span class="n">the</span> <span class="n">file</span> <span class="ow">or</span> <span class="n">stream</span> <span class="n">this</span> <span class="n">BedTool</span> <span class="n">points</span> <span class="n">to</span> <span class="ow">is</span> <span class="n">implicitly</span>
+<span class="n">passed</span> <span class="k">as</span> <span class="n">the</span> <span class="o">-</span><span class="n">a</span> <span class="n">argument</span> <span class="n">to</span> <span class="n">intersectBed</span>
+</pre></div>
+</div>
+<p>OK, enough about arguments for now, but you can read more about them in
+<a class="reference internal" href="topical-design-principles.html#similarity-principle"><span class="std std-ref">Principle 2: Names and arguments are as similar as possible to BEDTools</span></a>, <a class="reference internal" href="topical-design-principles.html#default-args-principle"><span class="std std-ref">Principle 4: Sensible default args</span></a> and <a class="reference internal" href="topical-design-principles.html#non-defaults-principle"><span class="std std-ref">Principal 5: Other arguments have no defaults</span></a>.</p>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">pybedtools</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="main.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="main.html#running-tests-compiling-docs">Running tests, compiling docs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3-brief-examples.html">Three brief examples</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="tutorial-contents.html">Tutorial Contents</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="intro.html">Intro</a></li>
+<li class="toctree-l2"><a class="reference internal" href="create-a-bedtool-tutorial.html">Create a <code class="xref py py-class docutils literal notranslate"><span class="pre">BedTool</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="intersections.html">Intersections</a></li>
+<li class="toctree-l2"><a class="reference internal" href="save-results.html">Saving the results</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Default arguments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="piping.html">Chaining methods together (pipe)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="piping.html#operator-overloading">Operator overloading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="intervals.html">Intervals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="filtering.html">Filtering</a></li>
+<li class="toctree-l2"><a class="reference internal" href="each.html">Each</a></li>
+<li class="toctree-l2"><a class="reference internal" href="history.html">Using the history and tags</a></li>
+<li class="toctree-l2"><a class="reference internal" href="history.html#deleting-temp-files-specific-to-a-single-bedtool">Deleting temp files specific to a single <code class="xref py py-class docutils literal notranslate"><span class="pre">BedTool</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="topical-documentation-contents.html">Topical Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="FAQs.html">FAQs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="scripts.html">Scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="autodoc_source.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">pybedtools</span></code> Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="changes.html">Changelog</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  <li><a href="tutorial-contents.html">Tutorial Contents</a><ul>
+      <li>Previous: <a href="save-results.html" title="previous chapter">Saving the results</a></li>
+      <li>Next: <a href="piping.html" title="next chapter">Chaining methods together (pipe)</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="piping.html" title="Chaining methods together (pipe)"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="save-results.html" title="Saving the results"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">pybedtools 0.10.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="tutorial-contents.html" accesskey="U">Tutorial Contents</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Default arguments</a></li> 
+      </ul>
+    </div>
+
+
+    <div class="footer">
+      &#169;2010-2015, Ryan Dale.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 7.3.7</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 0.7.16</a>
+      
+      |
+      <a href="_sources/default-arguments.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

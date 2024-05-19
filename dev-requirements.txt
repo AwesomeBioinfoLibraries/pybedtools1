@@ -1,7 +1,0 @@
-cython
-matplotlib
-numpydoc
-pandas
-pyyaml
-sphinx
-pysam

@@ -1,0 +1,6 @@
+﻿pybedtools.bedtool.BedTool.relative\_distance
+=============================================
+
+.. currentmodule:: pybedtools.bedtool
+
+.. automethod:: BedTool.relative_distance

@@ -1,0 +1,6 @@
+﻿pybedtools.bedtool.BedTool.multi\_intersect
+===========================================
+
+.. currentmodule:: pybedtools.bedtool
+
+.. automethod:: BedTool.multi_intersect

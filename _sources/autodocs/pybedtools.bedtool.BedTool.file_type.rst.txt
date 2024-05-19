@@ -1,0 +1,6 @@
+﻿pybedtools.bedtool.BedTool.file\_type
+=====================================
+
+.. currentmodule:: pybedtools.bedtool
+
+.. autoproperty:: BedTool.file_type

@@ -1,0 +1,6 @@
+﻿pybedtools.bedtool.BedTool.multi\_bam\_coverage
+===============================================
+
+.. currentmodule:: pybedtools.bedtool
+
+.. automethod:: BedTool.multi_bam_coverage

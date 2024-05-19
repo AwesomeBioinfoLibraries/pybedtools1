@@ -1,0 +1,6 @@
+﻿pybedtools.helpers.get\_tempdir
+===============================
+
+.. currentmodule:: pybedtools.helpers
+
+.. autofunction:: get_tempdir

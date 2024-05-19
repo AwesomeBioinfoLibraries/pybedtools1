@@ -1,0 +1,6 @@
+﻿pybedtools.contrib.plotting.binary\_heatmap
+===========================================
+
+.. currentmodule:: pybedtools.contrib.plotting
+
+.. autofunction:: binary_heatmap
