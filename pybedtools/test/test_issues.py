@@ -88,6 +88,7 @@ def test_issue_118():
     end_fs = p.open_files()
     end_fds_lst = get_fds(os.getpid())
     log.debug(end_fs)
+    log.warning(end_fds_lst)
     assert set(end_fs).difference(start_fs) == set()
     assert set(start_fs).difference(end_fs) == set()
     assert set(end_fds_lst).difference(start_fds_lst) == set()
